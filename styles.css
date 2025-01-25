@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* System/Default theme */
+:root {
+    /* Modern gradient palette */
+    --gradient-start: #2D3250;
+    --gradient-end: #424B94;
+    --accent-blue: #7C9FF3;
+    --accent-purple: #8E7AB5;
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --button-gradient: linear-gradient(135deg, #7C9FF3, #8E7AB5);
+    --hover-gradient: linear-gradient(135deg, #8E7AB5, #7C9FF3);
+    --parchment-base: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="system"] {
+        --primary-color: var(--primary-color-dark);
+        --secondary-color: var(--secondary-color-dark);
+        --background-color: var(--background-color-dark);
+        --text-color: var(--text-color-dark);
+    }
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #f0f4f8, #dfe7ec);
+    color: #333;
+    margin: 0;
+}
+
+body::before {
+    display: none;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.timer-frame h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #2d3250;
+    background: linear-gradient(135deg, #7c9ff3, #8e7ab5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.timer-display {
+    font-size: 4em;
+    font-weight: 600;
+    margin: 20px 0;
+    color: #2d3250;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: var(--button-gradient);
+    color: #fff;
+    transition: background 0.3s ease;
+    width: 120px;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--hover-gradient);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+}
+
+#theme-selector {
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    font-family: 'Cormorant Garamond', serif;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .timer-display {
+        font-size: 3em;
+    }
+}
+
+@keyframes shimmer {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#toggle-mode {
+    background: linear-gradient(135deg, #8e7ab5, #7c9ff3);
+}
