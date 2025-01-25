@@ -62,6 +62,7 @@ body::before {
     margin-bottom: 20px;
     color: #2d3250;
     background: linear-gradient(135deg, #7c9ff3, #8e7ab5);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
