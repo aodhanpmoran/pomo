@@ -28,7 +28,7 @@ if (modeToggle) modeToggle.classList.add(isWorkMode ? 'work' : 'rest');
 function updateDisplay() {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    minutesDisplay.textContent = String(mins).padStart(2, '0');
+    minutesDisplay.textContent = String(mins);
     secondsDisplay.textContent = String(secs).padStart(2, '0');
 }
 

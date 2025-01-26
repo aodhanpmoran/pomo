@@ -56,7 +56,7 @@ body::before {
     backdrop-filter: blur(8px);
     padding: 40px;
     max-width: 400px;
-    width: 100%;
+    width: 90%;
     animation: softPulse 4s ease-in-out infinite;
     transform: translateZ(0);
     position: relative;
