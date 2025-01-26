@@ -162,3 +162,127 @@ body::before {
 #toggle-mode {
     background: linear-gradient(135deg, #8e7ab5, #7c9ff3);
 }
+
+.mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 8px;
+    transition: all 0.5s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+}
+
+.mode-toggle .icon {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px;
+    transition: all 0.5s ease;
+}
+
+.mode-toggle .sun {
+    stroke: #92E3A9;
+    fill: none;
+    transform: scale(0);
+    stroke-width: 2px;
+}
+
+.mode-toggle .moon {
+    stroke: #8E7AB5;
+    fill: none;
+    transform: scale(1);
+    stroke-width: 2px;
+}
+
+.mode-toggle.work {
+    background: rgba(146, 227, 169, 0.2);
+}
+
+.mode-toggle.work .sun {
+    transform: scale(1);
+}
+
+.mode-toggle.work .moon {
+    transform: scale(0);
+}
+
+.mode-toggle.rest {
+    background: rgba(142, 122, 181, 0.2);
+}
+
+.mode-toggle:hover {
+    box-shadow: 0 0 15px rgba(124, 159, 243, 0.5);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(45, 50, 80, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(124, 159, 243, 0.4);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    z-index: 10000;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal h2 {
+    color: #2d3250;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+#motoInput {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border: 2px solid var(--accent-blue);
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-family: inherit;
+}
+
+.modal-btn {
+    width: 100%;
+}
+
+.current-moto {
+    font-size: 1.8em;
+    margin: 15px 0;
+    color: #2d3250;
+    font-style: italic;
+}

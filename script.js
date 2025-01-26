@@ -10,13 +10,19 @@ let seconds = WORK_TIME;
 let isRunning = false;
 let isWorkMode = true;
 let timerId = null;
+let currentMoto = '';
 
 // Get DOM elements
 const minutesDisplay = document.getElementById('minutes');
 const secondsDisplay = document.getElementById('seconds');
 const startBtn = document.getElementById('start');
 const resetBtn = document.getElementById('reset');
-const toggleModeBtn = document.getElementById('toggle-mode');
+const modeToggle = document.getElementById('mode-toggle');
+const modal = document.getElementById('motoModal');
+const motoInput = document.getElementById('motoInput');
+const submitMotoBtn = document.getElementById('submitMoto');
+const timerTitle = document.querySelector('.timer-frame h1');
+if (modeToggle) modeToggle.classList.add(isWorkMode ? 'work' : 'rest');
 
 // Update display
 function updateDisplay() {
@@ -31,26 +37,14 @@ console.log('Start button element:', startBtn);
 if (startBtn) {
     console.log('Attaching event listener to Start button');
     startBtn.addEventListener('click', function() {
-        console.log('Start clicked, isRunning:', isRunning);
-        if (isRunning) {
-            // Pause
+        if (!isRunning) {
+            // Show modal when starting new timer
+            modal.style.display = 'flex';
+        } else {
+            // Pause functionality
             clearInterval(timerId);
             startBtn.textContent = 'Start';
             isRunning = false;
-        } else {
-            // Start
-            startBtn.textContent = 'Pause';
-            isRunning = true;
-            timerId = setInterval(() => {
-                seconds--;
-                if (seconds < 0) {
-                    clearInterval(timerId);
-                    alert('Time is up!');
-                    seconds = isWorkMode ? WORK_TIME : REST_TIME;
-                    // Optionally restart the timer here
-                }
-                updateDisplay();
-            }, 1000);
         }
     });
 } else {
@@ -65,19 +59,46 @@ if (resetBtn) {
         seconds = isWorkMode ? WORK_TIME : REST_TIME;
         isRunning = false;
         startBtn.textContent = 'Start';
+        timerTitle.textContent = 'Renaissance Pomodoro';
+        currentMoto = '';
         updateDisplay();
     });
 }
 
-// Add event listener for the toggle button
-if (toggleModeBtn) {
-    toggleModeBtn.addEventListener('click', function() {
-        isWorkMode = !isWorkMode; // Toggle the mode
-        seconds = isWorkMode ? WORK_TIME : REST_TIME; // Set the timer based on the mode
-        toggleModeBtn.textContent = isWorkMode ? 'Switch to Rest' : 'Switch to Work'; // Update button text
-        updateDisplay(); // Update the display to reflect the new time
+// Add event listener for the mode toggle
+if (modeToggle) {
+    modeToggle.addEventListener('click', function() {
+        isWorkMode = !isWorkMode;
+        this.classList.toggle('work', isWorkMode);
+        this.classList.toggle('rest', !isWorkMode);
+        seconds = isWorkMode ? WORK_TIME : REST_TIME;
+        updateDisplay();
     });
 }
+
+// Add modal submit handler
+submitMotoBtn.addEventListener('click', function() {
+    currentMoto = motoInput.value.trim();
+    if (currentMoto) {
+        modal.style.display = 'none';
+        timerTitle.textContent = currentMoto;
+        motoInput.value = '';
+        
+        // Start the timer
+        startBtn.textContent = 'Pause';
+        isRunning = true;
+        timerId = setInterval(() => {
+            seconds--;
+            if (seconds < 0) {
+                clearInterval(timerId);
+                alert('Time is up!');
+                seconds = isWorkMode ? WORK_TIME : REST_TIME;
+                timerTitle.textContent = 'Renaissance Pomodoro';
+            }
+            updateDisplay();
+        }, 1000);
+    }
+});
 
 // Initial display
 updateDisplay();
