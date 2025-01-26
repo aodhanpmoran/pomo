@@ -1,8 +1,7 @@
 console.log('Script starting...');
 
 document.addEventListener('DOMContentLoaded', function () {
-    try {
-        console.log('DOM fully loaded');
+    console.log('DOM fully loaded');
 
 // Timer state
 const WORK_TIME = 25 * 60; // 25 minutes in seconds
@@ -38,14 +37,15 @@ console.log('Start button element:', startBtn);
 if (startBtn) {
     console.log('Attaching event listener to Start button');
     startBtn.addEventListener('click', function() {
-        if (!isRunning) {
-            // Show modal when starting new timer
-            modal.style.display = 'flex';
-        } else {
-            // Pause functionality
+        console.log('Start clicked, isRunning:', isRunning);
+        if (isRunning) {
+            // Pause
             clearInterval(timerId);
             startBtn.textContent = 'Start';
             isRunning = false;
+        } else {
+            // Show modal before starting
+            modal.style.display = 'flex';
         }
     });
 } else {
@@ -60,7 +60,7 @@ if (resetBtn) {
         seconds = isWorkMode ? WORK_TIME : REST_TIME;
         isRunning = false;
         startBtn.textContent = 'Start';
-        timerTitle.textContent = 'Renaissance Pomodoro';
+        timerTitle.textContent = "Paula's Pomodoro";
         currentMoto = '';
         updateDisplay();
     });
@@ -94,7 +94,9 @@ submitMotoBtn.addEventListener('click', function() {
                 clearInterval(timerId);
                 alert('Time is up!');
                 seconds = isWorkMode ? WORK_TIME : REST_TIME;
-                timerTitle.textContent = 'Renaissance Pomodoro';
+                timerTitle.textContent = "Paula's Pomodoro";
+                isRunning = false;
+                startBtn.textContent = 'Start';
             }
             updateDisplay();
         }, 1000);
@@ -103,10 +105,6 @@ submitMotoBtn.addEventListener('click', function() {
 
 // Initial display
 updateDisplay();
-console.log('Script initialization complete');
-    } catch (error) {
-        console.warn('Storage access restricted:', error);
-        // Continue with basic functionality
-        updateDisplay();
-    }
+console.log('Script initialization complete'); 
+
 });
