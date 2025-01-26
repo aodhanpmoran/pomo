@@ -1,7 +1,8 @@
 console.log('Script starting...');
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM fully loaded');
+    try {
+        console.log('DOM fully loaded');
 
 // Timer state
 const WORK_TIME = 25 * 60; // 25 minutes in seconds
@@ -102,6 +103,10 @@ submitMotoBtn.addEventListener('click', function() {
 
 // Initial display
 updateDisplay();
-console.log('Script initialization complete'); 
-
+console.log('Script initialization complete');
+    } catch (error) {
+        console.warn('Storage access restricted:', error);
+        // Continue with basic functionality
+        updateDisplay();
+    }
 });
